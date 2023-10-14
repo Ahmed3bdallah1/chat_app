@@ -105,7 +105,7 @@ class _ChatScreenState extends State<ChatScreen> {
         iconTheme: const IconThemeData(color: Colors.white),
       ),
       body: Padding(
-        padding: const EdgeInsets.only(left: 30, right: 30),
+        padding: const EdgeInsets.only(left: 20, right: 20),
         child: Container(
           width: size.width * .95,
           decoration: BoxDecoration(

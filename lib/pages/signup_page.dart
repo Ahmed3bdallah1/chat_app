@@ -86,7 +86,7 @@ class _SignupPageState extends State<SignupPage> {
           backgroundColor: Colors.transparent,
         ),
         body: Padding(
-          padding: const EdgeInsets.only(left: 45, right: 45, bottom: 45),
+          padding: const EdgeInsets.only(left: 20, right: 20, bottom: 45),
           child: Container(
             width: size.width * .95,
             decoration: BoxDecoration(

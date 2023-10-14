@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:whats_app/common/widgets/message_shape.dart';
 import 'package:whats_app/services/chat/chating_services.dart';
 
-import '../common/constants/color.dart';
+import '../../common/constants/color.dart';
 
 class ChatScreen extends StatefulWidget {
   String username;

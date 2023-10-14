@@ -7,14 +7,15 @@ class MessageShape extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Constants constants=Constants();
     return Container(
       padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
-        color: Constants().primaryColor,
+        color: constants.primaryColor,
         borderRadius: BorderRadius.circular(10),
-        gradient: Constants().linearGradientWhiteBlue,
+        gradient: constants.linearGradientWhiteBlue,
       ),
-      child: Text(message,style: const TextStyle(fontSize: 15),),
+      child: Text(message,style: const TextStyle(fontSize: 15)),
     );
   }
 }

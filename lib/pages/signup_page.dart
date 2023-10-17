@@ -40,20 +40,20 @@ class _SignupPageState extends State<SignupPage> {
     try {
       await _authService.registerWithEmailPassword(email, password, userName);
       print('User signed up successfully');
-      showDialog(
-          context: context,
-          builder: (_) {
-            return CupertinoAlertDialog(
-                title: const Text('successes please go to login page'),
-                actions: [
-                  CupertinoDialogAction(
-                      onPressed: () {
-                        Navigator.pushReplacement(context,
-                            MaterialPageRoute(builder: (_) => const SignInScreen()));
-                      },
-                      child: const Text('ok'))
-                ]);
-          });
+      // showDialog(
+      //     context: context,
+      //     builder: (_) {
+      //       return CupertinoAlertDialog(
+      //           title: const Text('successes please go to login page'),
+      //           actions: [
+      //             CupertinoDialogAction(
+      //                 onPressed: () {
+      //                   Navigator.pushReplacement(context,
+      //                       MaterialPageRoute(builder: (_) => const SignInScreen()));
+      //                 },
+      //                 child: const Text('ok'))
+      //           ]);
+      //     });
     } on FirebaseAuthException catch (e) {
       print('Sign-up failed: ${e.message}');
       showDialog(

@@ -26,10 +26,10 @@ class _SignInScreenState extends State<SignInScreen> {
 
     try {
       await _authService.loginWithEmailPassword(email, password);
-      // Sign-in successful, do something (e.g., navigate to the home screen)
+
       print('User signed in successfully');
     } on FirebaseAuthException catch (e) {
-      // print('Sign-in failed: ${e.message}');
+      print('Sign-in failed: ${e.message}');
       showDialog(
           context: context,
           builder: (_) {

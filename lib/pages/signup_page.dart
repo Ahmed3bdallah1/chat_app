@@ -38,7 +38,7 @@ class _SignupPageState extends State<SignupPage> {
     final String userName = usernameController.text;
 
     try {
-      await _authService.registerWithEmailPassword(email, password, userName);
+      await _authService.registerWithEmailPassword(context,email, password, userName);
       print('User signed up successfully');
       // showDialog(
       //     context: context,

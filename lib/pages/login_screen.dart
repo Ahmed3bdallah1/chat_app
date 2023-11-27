@@ -25,7 +25,7 @@ class _SignInScreenState extends State<SignInScreen> {
     final String password = _passwordController.text;
 
     try {
-      await _authService.loginWithEmailPassword(email, password);
+      await _authService.loginWithEmailPassword(context, email, password);
 
       print('User signed in successfully');
     } on FirebaseAuthException catch (e) {

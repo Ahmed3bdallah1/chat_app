@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:whats_app/firebase_options.dart';
+import 'package:whats_app/pages/splash_screen.dart';
 import 'package:whats_app/services/auth/auth_check.dart';
 import 'package:whats_app/services/chat/chating_services.dart';
 Future<void> main() async{
@@ -27,7 +28,7 @@ class MyApp extends StatelessWidget {
           // colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home: const AuthCheck(),
+        home: const SplashScreen(),
       ),
     );
   }

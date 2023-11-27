@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:whats_app/common/widgets/message_shape.dart';
+import 'package:whats_app/common/widgets/messages_list.dart';
 import 'package:whats_app/services/chat/chating_services.dart';
 
 import '../../common/constants/color.dart';
@@ -30,64 +31,50 @@ class _ChatScreenState extends State<ChatScreen> {
     }
   }
 
-  Widget buildMessageItem(DocumentSnapshot snapshot) {
-    Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
+  // Widget buildMessageItem(DocumentSnapshot snapshot) {
+  //   Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
+  //
+  //   var alignment = (data["senderId"] == _auth.currentUser!.uid)
+  //       ? Alignment.centerLeft
+  //       : Alignment.centerRight;
+  //
+  //   return Container(
+  //     alignment: alignment,
+  //     child: Padding(
+  //       padding: const EdgeInsets.all(8.0),
+  //       child: Column(
+  //         crossAxisAlignment: (data["senderId"] == _auth.currentUser!.uid)
+  //             ? CrossAxisAlignment.start
+  //             : CrossAxisAlignment.end,
+  //         mainAxisAlignment: (data["senderId"] == _auth.currentUser!.uid)
+  //             ? MainAxisAlignment.end
+  //             : MainAxisAlignment.start,
+  //         children: [
+  //           Text(data["senderEmail"],style: const TextStyle(fontSize: 10)),
+  //           MessageShape(message: data['message'])
+  //         ],
+  //       ),
+  //     ),
+  //   );
+  // }
 
-    var alignment = (data["senderId"] == _auth.currentUser!.uid)
-        ? Alignment.centerLeft
-        : Alignment.centerRight;
-
-    return Container(
-      alignment: alignment,
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          crossAxisAlignment: (data["senderId"] == _auth.currentUser!.uid)
-              ? CrossAxisAlignment.start
-              : CrossAxisAlignment.end,
-          mainAxisAlignment: (data["senderId"] == _auth.currentUser!.uid)
-              ? MainAxisAlignment.end
-              : MainAxisAlignment.start,
-          children: [
-            Text(data["senderEmail"],style: const TextStyle(fontSize: 10)),
-            MessageShape(message: data['message'])
-            // Container(
-            //     decoration: BoxDecoration(
-            //         borderRadius: BorderRadius.circular(10),
-            //         color: constants.primaryColor,
-            //         gradient: constants.linearGradientWhiteBlue,
-            //          boxShadow: [
-            //            BoxShadow(
-            //                color: constants.primaryColor,
-            //                spreadRadius: 5,
-            //                blurRadius: 8,
-            //                offset: const Offset(0, 5))
-            //          ]
-            //     ),
-            //     child: Text(data["message"]))
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget buildMessageList() {
-    return StreamBuilder<QuerySnapshot>(
-        stream:
-            chatServices.getMessages(widget.receiverId, _auth.currentUser!.uid),
-        builder: (context, snapshot) {
-          if (snapshot.hasError) {
-            return Text("error ${snapshot.error}");
-          }
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Text("loading..");
-          }
-          return ListView(
-              children: snapshot.data!.docs
-                  .map((documents) => buildMessageItem(documents))
-                  .toList());
-        });
-  }
+  // Widget buildMessageList() {
+  //   return StreamBuilder<QuerySnapshot>(
+  //       stream:
+  //           chatServices.getMessages(widget.receiverId, _auth.currentUser!.uid),
+  //       builder: (context, snapshot) {
+  //         if (snapshot.hasError) {
+  //           return Text("error ${snapshot.error}");
+  //         }
+  //         if (snapshot.connectionState == ConnectionState.waiting) {
+  //           return const Center(child: Text("loading.."));
+  //         }
+  //         return ListView(
+  //             children: snapshot.data!.docs
+  //                 .map((documents) => buildMessageItem(documents))
+  //                 .toList());
+  //       });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -118,12 +105,12 @@ class _ChatScreenState extends State<ChatScreen> {
                     blurRadius: 8,
                     offset: const Offset(0, 5))
               ]),
-          child: buildMessageList(),
+          child: MessagesList(receiverId: widget.receiverId),
         ),
       ),
       bottomNavigationBar: Padding(
         padding:
-            const EdgeInsets.only(left: 30, right: 30, top: 10, bottom: 10),
+        const EdgeInsets.only(left: 30, right: 30, top: 10, bottom: 10),
         child: TextField(
           controller: messageController,
           decoration: InputDecoration(
@@ -131,7 +118,7 @@ class _ChatScreenState extends State<ChatScreen> {
               filled: true,
               fillColor: Colors.white,
               border:
-                  OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
+              OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
               suffixIcon: GestureDetector(
                   onTap: () {
                     sendMessage();

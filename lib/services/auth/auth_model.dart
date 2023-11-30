@@ -24,8 +24,6 @@ class FirebaseAuthService {
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (_) => const HomePage()));
 
-      print('Login successful');
-
       return userCredential;
     } on FirebaseAuthException catch (e) {
       print('Login failed: ${e.message}');
@@ -35,7 +33,6 @@ class FirebaseAuthService {
 
   Future<void> logout() async {
     await _auth.signOut();
-    print('Logged out');
   }
 
   Future<UserCredential> registerWithEmailPassword(BuildContext context,

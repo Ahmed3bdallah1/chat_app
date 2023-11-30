@@ -39,20 +39,6 @@ class _MessageItemState extends State<MessageItem> {
           children: [
             Text(data["senderEmail"],style: const TextStyle(fontSize: 10)),
             MessageShape(message: data['message'])
-            // Container(
-            //     decoration: BoxDecoration(
-            //         borderRadius: BorderRadius.circular(10),
-            //         color: constants.primaryColor,
-            //         gradient: constants.linearGradientWhiteBlue,
-            //          boxShadow: [
-            //            BoxShadow(
-            //                color: constants.primaryColor,
-            //                spreadRadius: 5,
-            //                blurRadius: 8,
-            //                offset: const Offset(0, 5))
-            //          ]
-            //     ),
-            //     child: Text(data["message"]))
           ],
         ),
       ),

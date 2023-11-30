@@ -91,41 +91,49 @@ class _ChatScreenState extends State<ChatScreen> {
         elevation: 0,
         iconTheme: const IconThemeData(color: Colors.white),
       ),
-      body: Padding(
-        padding: const EdgeInsets.only(left: 20, right: 20),
-        child: Container(
-          width: size.width * .95,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(30),
-              gradient: constants.linearGradientWhiteBlue,
-              boxShadow: [
-                BoxShadow(
-                    color: constants.primaryColor.withOpacity(.5),
-                    spreadRadius: 5,
-                    blurRadius: 8,
-                    offset: const Offset(0, 5))
-              ]),
-          child: MessagesList(receiverId: widget.receiverId),
+      body: ListView(children: [
+        Padding(
+          padding: const EdgeInsets.only(left: 20, right: 20),
+          child: Container(
+            width: size.width * .95,
+            height: size.height * .775,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(30),
+                gradient: constants.linearGradientWhiteBlue,
+                boxShadow: [
+                  BoxShadow(
+                      color: constants.primaryColor.withOpacity(.5),
+                      spreadRadius: 5,
+                      blurRadius: 8,
+                      offset: const Offset(0, 5))
+                ]),
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  MessagesList(receiverId: widget.receiverId),
+                ],
+              ),
+            ),
+          ),
         ),
-      ),
-      bottomNavigationBar: Padding(
-        padding:
-        const EdgeInsets.only(left: 30, right: 30, top: 10, bottom: 10),
-        child: TextField(
-          controller: messageController,
-          decoration: InputDecoration(
-              labelText: "send a message",
-              filled: true,
-              fillColor: Colors.white,
-              border:
-              OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
-              suffixIcon: GestureDetector(
-                  onTap: () {
-                    sendMessage();
-                  },
-                  child: const Icon(Icons.send))),
-        ),
-      ),
+        Padding(
+          padding: const EdgeInsets.only(left: 30, right: 30, top: 10),
+          child: TextField(
+            controller: messageController,
+            decoration: InputDecoration(
+                filled: true,
+                fillColor: Colors.white,
+                border:
+                    OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
+                suffixIcon: GestureDetector(
+                    onTap: () {
+                      sendMessage();
+                    },
+                    child: const Icon(Icons.send))),
+          ),
+        )
+      ]),
+      // bottomNavigationBar:,
     );
   }
 }

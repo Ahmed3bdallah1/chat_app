@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
             create: (BuildContext context) => ChatServices()),
       ],
       child: MaterialApp(
-        title: 'chat_app',
+        title: 'chat app',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           // colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),

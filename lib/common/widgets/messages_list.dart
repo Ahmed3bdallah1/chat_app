@@ -27,9 +27,13 @@ class _MessagesListState extends State<MessagesList> {
             return Text("error ${snapshot.error}");
           }
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: Text("loading.."));
+            return const Center(
+                child: CircularProgressIndicator(
+              color: Colors.white,
+            ));
           }
-          return ListView(
+          return Column(
+              mainAxisSize: MainAxisSize.max,
               children: snapshot.data!.docs
                   .map((documents) => MessageItem(snapshot: documents))
                   .toList());

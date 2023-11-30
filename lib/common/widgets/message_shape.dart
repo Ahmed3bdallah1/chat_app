@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:whats_app/common/constants/color.dart';
 
 class MessageShape extends StatelessWidget {
-   String message;
-   MessageShape({super.key,required this.message});
+  final String message;
+
+  const MessageShape({super.key, required this.message});
 
   @override
   Widget build(BuildContext context) {
-    Constants constants=Constants();
+    Constants constants = Constants();
     return Container(
       padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
@@ -15,7 +16,7 @@ class MessageShape extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
         gradient: constants.linearGradientWhiteBlue,
       ),
-      child: Text(message,style: const TextStyle(fontSize: 15)),
+      child: Text(message, style: const TextStyle(fontSize: 15)),
     );
   }
 }

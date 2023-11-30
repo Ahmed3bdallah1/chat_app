@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:whats_app/common/widgets/user_list.dart';
 
 import '../common/constants/color.dart';
 import '../services/auth/auth_model.dart';
@@ -53,67 +54,64 @@ class _HomePageState extends State<HomePage> {
               icon: const Icon(Icons.logout_sharp))
         ],
       ),
-      body: userList(),
+      body: const UserList(),
     );
   }
 
-  Widget userList() {
-    return StreamBuilder<QuerySnapshot>(
-        stream: FirebaseFirestore.instance.collection('users').snapshots(),
-        builder: (context, snapshot) {
-          if (snapshot.hasError) {
-            return const Center(
-                child: Text("error in loading chats",
-                    style: TextStyle(color: Colors.white, fontSize: 20)));
-          }
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(
-                child: Text(
-              "loading...",
-              style: TextStyle(color: Colors.white, fontSize: 20),
-            ));
-          }
-          return ListView(
-            children: snapshot.data!.docs
-                .map<Widget>((e) => userTileItem(e))
-                .toList(),
-          );
-        });
-  }
-
-  Widget userTileItem(DocumentSnapshot snapshot) {
-    Map<String, dynamic> data = snapshot.data()! as Map<String, dynamic>;
-
-    if (_authService.currentUser.email != snapshot['email']) {
-      return Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Container(
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(30),
-              gradient: constants.linearGradientWhiteBlue,
-              boxShadow: [
-                BoxShadow(
-                    color: constants.primaryColor.withOpacity(.5),
-                    spreadRadius: 5,
-                    blurRadius: 8,
-                    offset: const Offset(0, 5))
-              ]),
-          child: ListTile(
-            title: Text(data["username"]),
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (_) => ChatScreen(
-                            username: snapshot['username'],
-                            receiverId: snapshot['uid'],
-                          )));
-            },
-          ),
-        ),
-      );
-    } else {
-      return Container();
-    }
-  }
+  // Widget userList() {
+  //   return StreamBuilder<QuerySnapshot>(
+  //       stream: FirebaseFirestore.instance.collection('users').snapshots(),
+  //       builder: (context, snapshot) {
+  //         if (snapshot.hasError) {
+  //           return const Center(
+  //               child: Text("error in loading chats",
+  //                   style: TextStyle(color: Colors.white, fontSize: 20)));
+  //         }
+  //         if (snapshot.connectionState == ConnectionState.waiting) {
+  //           return const Center(
+  //               child: CircularProgressIndicator());
+  //         }
+  //         return ListView(
+  //           children: snapshot.data!.docs
+  //               .map<Widget>((e) => userTileItem(e))
+  //               .toList(),
+  //         );
+  //       });
+  // }
+  //
+  // Widget userTileItem(DocumentSnapshot snapshot) {
+  //   Map<String, dynamic> data = snapshot.data()! as Map<String, dynamic>;
+  //
+  //   if (_authService.currentUser.email != snapshot['email']) {
+  //     return Padding(
+  //       padding: const EdgeInsets.all(8.0),
+  //       child: Container(
+  //         decoration: BoxDecoration(
+  //             borderRadius: BorderRadius.circular(30),
+  //             gradient: constants.linearGradientWhiteBlue,
+  //             boxShadow: [
+  //               BoxShadow(
+  //                   color: constants.primaryColor.withOpacity(.5),
+  //                   spreadRadius: 5,
+  //                   blurRadius: 8,
+  //                   offset: const Offset(0, 5))
+  //             ]),
+  //         child: ListTile(
+  //           title: Text(data["username"]),
+  //           onTap: () {
+  //             Navigator.push(
+  //                 context,
+  //                 MaterialPageRoute(
+  //                     builder: (_) => ChatScreen(
+  //                           username: snapshot['username'],
+  //                           receiverId: snapshot['uid'],
+  //                         )));
+  //           },
+  //         ),
+  //       ),
+  //     );
+  //   } else {
+  //     return Container();
+  //   }
+  // }
 }
